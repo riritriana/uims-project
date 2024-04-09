@@ -1,5 +1,5 @@
 async function send(endpoint, method, body, header = "application/json") {
-    const response = await fetch(`http://localhost:3000/api${endpoint}`, {
+    const response = await fetch(`http://localhost:3000${endpoint}`, {
         method,
         credentials: "include",
         headers: {
@@ -7,8 +7,7 @@ async function send(endpoint, method, body, header = "application/json") {
         },
         body: JSON.stringify(body),
     });
-    const data = await (method === "GET" ? response.json() : response.text());
-    //     
+    const data = await (method === "GET" ? response.json() : response.text());  
     return data;
 }
 

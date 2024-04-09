@@ -8,7 +8,8 @@ import Students from "./admin/Students.jsx";
 import Lecturers from "./admin/Lecturers.jsx";
 import Course from "./admin/Course.jsx";
 import Departement from "./admin/Departement.jsx";
-import Learning from "./admin/Learning.jsx";
+import Fees from "./admin/Fees.jsx";
+// import Learning from "./admin/Learning.jsx";
 import Login from "./login/Login.jsx";
 import Register from "./login/Register.jsx";
 const pages = [
@@ -43,9 +44,14 @@ const pages = [
         element: <Course />,
       },
       {
-        path: "/learning",
-        element: <Learning />,
+        path: "/fees",
+        element: <Fees />,
       },
+
+      // {
+      //   path: "/learning",
+      //   element: <Learning />,
+      // },
     ],
   },
 ];

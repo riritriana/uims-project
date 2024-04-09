@@ -1,29 +1,19 @@
 import { useState } from "react";
-// import Cookie from "js-cookie";
 import { Link } from "react-router-dom";
+import { api } from "../api.js";
 
 export default function Register() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [register, setRegister] = useState({ email: "", password: "" });
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    fetch(`${import.meta.env.VITE_API_BASE_URL}/auth`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        // Cookie.set("token", data.token);
-        localStorage.setItem("token", data);
-        console.log(data.token);
-      });
+    try {
+      const response = await api.post("/auth/register", register); // Mengirim seluruh objek register
+      console.log(response); // Anda dapat menampilkan respons untuk memeriksa apakah registrasi berhasil atau tidak
+    } catch (error) {
+      alert("Registration failed. Please try again."); // Tangani kesalahan jika registrasi gagal
+      console.error(error);
+    }
   }
 
   return (
@@ -51,8 +41,10 @@ export default function Register() {
                   type="email"
                   autoComplete="email"
                   required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={register.email} // Mengakses nilai email dari objek register
+                  onChange={(e) =>
+                    setRegister({ ...register, email: e.target.value })
+                  } // Memperbarui nilai email dalam objek register
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
               </div>
@@ -72,8 +64,10 @@ export default function Register() {
                   type="password"
                   autoComplete="current-password"
                   required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={register.password} // Mengakses nilai password dari objek register
+                  onChange={(e) =>
+                    setRegister({ ...register, password: e.target.value })
+                  } // Memperbarui nilai password dalam objek register
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
               </div>

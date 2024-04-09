@@ -5,7 +5,7 @@ import {
   User,
   UserRound,
   BookOpenText,
-  Presentation,
+  CircleDollarSign,
 } from "lucide-react";
 import logo from "../assets/logo1.jpg";
 export default function Header() {
@@ -20,7 +20,7 @@ export default function Header() {
           <ul className="flex w-full justify-evenly">
             <li className="flex items-center gap-2 cursor-pointer">
               <Link
-                to="/admin"
+                to="/"
                 className="text-black text-xl flex flex-col items-center"
               >
                 <Home className="mb-1" />
@@ -65,11 +65,11 @@ export default function Header() {
             </li>
             <li className="flex items-center gap-2 cursor-pointer">
               <Link
-                to="/learning"
+                to="/fees"
                 className="text-black text-xl flex flex-col items-center"
               >
-                <Presentation className="mb-1" />
-                <span>Learning</span>
+                <CircleDollarSign className="mb-1" />
+                <span>Fees</span>
               </Link>
             </li>
           </ul>

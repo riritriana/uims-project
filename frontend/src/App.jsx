@@ -21,7 +21,7 @@ function App() {
 
   useEffect(() => {
     api
-      .get("/auth/login/me")
+      .get("/university/me")
       .then((me) => {
         if (!me) {
           console.log(me);
@@ -31,7 +31,7 @@ function App() {
         }
       })
       .catch((eror) => {
-        console(eror);
+        console.log(eror);
       });
   }, [user?.id]);
   return (

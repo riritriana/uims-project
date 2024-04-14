@@ -16,7 +16,8 @@ CREATE TABLE users (
 
 CREATE TABLE departement(
     id_departement VARCHAR(10) PRIMARY KEY,
-    name_departement VARCHAR(30) NOT NULL
+    name_departement VARCHAR(30) NOT null,
+    name_dekan  VARCHAR(30) NOT null
 );
 
 
@@ -25,6 +26,7 @@ CREATE TABLE student(
     name_student VARCHAR(30) NOT NULL,
     nim VARCHAR(20) NOT NULL,
     id_departement VARCHAR(10) REFERENCES departement(id_departement)
+    
 );
 
 
@@ -32,6 +34,7 @@ CREATE TABLE lecturer(
     id_lecturer VARCHAR(10) PRIMARY KEY,
     name_lecturer VARCHAR(30) NOT NULL,
     id_departement VARCHAR(10) NOT NULL REFERENCES departement(id_departement)
+   
 );
 
 
@@ -39,16 +42,18 @@ CREATE TABLE course(
     id_course VARCHAR(10) PRIMARY KEY,
     name_course VARCHAR(30) NOT NULL,
     id_lecturer VARCHAR(10) NOT NULL REFERENCES lecturer(id_lecturer)
+  
 );
 
 
-CREATE TABLE learning(
-    id_learning VARCHAR(10) PRIMARY KEY,
-    name_class VARCHAR(20) NOT null,
+CREATE TABLE fees(
+    id_fees VARCHAR(10) PRIMARY KEY,
     id_student VARCHAR(10) NOT NULL REFERENCES student(id_student),
-    id_departement VARCHAR(10) NOT null REFERENCES departement(id_departement),
-    id_lecturer VARCHAR(10) NOT null REFERENCES lecturer(id_lecturer),
-    id_course VARCHAR(10) NOT null REFERENCES course(id_course)
-   
+    id_departement VARCHAR(10) NOT null REFERENCES departement(id_departement),  
+    pay_fees int not null 
 );
-
+drop table fees
+drop table course
+drop table lecturer
+drop table student
+drop table departement

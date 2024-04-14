@@ -24,7 +24,7 @@ export default function Login() {
               e.preventDefault();
               try {
                 // Gunakan api.post untuk melakukan permintaan
-                const userData = await api.post("/api/login", login);
+                const userData = await api.post("/auth/login", login);
                 setUser(userData);
                 navigate("/");
               } catch (error) {

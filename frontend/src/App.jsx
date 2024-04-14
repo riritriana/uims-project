@@ -8,6 +8,8 @@ import { api } from "./api.js";
 export const AllStateContext = createContext();
 function App() {
   const [departement, setDepartement] = useState([]);
+  const [formDepartement, setFormDepartement] = useState({});
+
   const [student, setStudent] = useState([]);
   const [dosen, setDosen] = useState([]);
   const [course, setCourse] = useState([]);
@@ -36,11 +38,13 @@ function App() {
   }, [user?.id]);
   return (
     <AllStateContext.Provider
-      value={
-        (departement,
+      value={{
+        departement,
         setDepartement,
         student,
         setStudent,
+        formDepartement,
+        setFormDepartement,
         dosen,
         setDosen,
         course,
@@ -54,8 +58,8 @@ function App() {
         countStudent,
         setCountStudent,
         countDosen,
-        setCountDosen)
-      }
+        setCountDosen,
+      }}
     >
       <Outlet context={[user, setUser]} />
     </AllStateContext.Provider>

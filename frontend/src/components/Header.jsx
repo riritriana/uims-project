@@ -6,9 +6,18 @@ import {
   UserRound,
   BookOpenText,
   CircleDollarSign,
+  Menu,
 } from "lucide-react";
+
 import logo from "../assets/logo1.jpg";
+import { useState } from "react";
 export default function Header() {
+  const [showMenu, setShowMenu] = useState(false); // state untuk mengelola tampilan menu
+
+  // fungsi untuk menampilkan atau menyembunyikan menu
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+  };
   return (
     <header className="flex justify-between items-center shadow-lg py-4 px-6 bg-white">
       <div className="w-full flex items-center justify-between">
@@ -16,7 +25,10 @@ export default function Header() {
           <img src={logo} alt="Logo" className="w-14" />
           <h1 className="text-2xl">UNIVERSITY TECHNOLOGY</h1>
         </div>
-        <nav className=" flex w-1/2 ">
+        <button className="block lg:hidden" onClick={toggleMenu}>
+          <Menu />
+        </button>
+        <nav className={`lg:flex w-1/2 ${showMenu ? "block" : "hidden"}`}>
           <ul className="flex w-full justify-evenly">
             <li className="flex items-center gap-2 cursor-pointer">
               <Link

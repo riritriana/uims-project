@@ -2,6 +2,7 @@
 import { Navigate } from "react-router-dom";
 import { useOutletContext } from "react-router-dom";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 import {
   School,
   User,
@@ -9,7 +10,7 @@ import {
   BookOpenText,
   CircleDollarSign,
 } from "lucide-react";
-
+import foto from "../../public/logo.jpg";
 // import { AllStateContext } from "../App";
 // import { api } from "../api";
 
@@ -69,8 +70,12 @@ export default function HomepageAdmin() {
               </div>
               <p>2000000</p>
             </div>
+            {/* <div className="absolute inset-0 z-0">
+              <img src={foto} alt="bg" className="object-cover w-full h-full" />
+            </div> */}
           </div>
         </div>
+        <Footer />
       </>
     );
   } else {

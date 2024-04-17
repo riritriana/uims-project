@@ -8,6 +8,29 @@ export default function Departement() {
   const [formDepartement, setFormDepartement] = useState({});
   const user = useOutletContext()[0];
 
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/university/getAllDepartement`, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          console.error("Failed to fetch departments");
+        }
+        return response.json(); // Parse JSON response
+      })
+      .then((data) => {
+        console.log(data);
+        setDepartement(data.departements);
+      })
+      .catch((error) => {
+        console.error("Error fetching departments:", error);
+      });
+  }, [setDepartement]);
+
   const addDepartement = () => {
     if (formDepartement.id_departement) {
       fetch(`${import.meta.env.VITE_API_BASE_URL}/university/addDepartement`, {
@@ -27,6 +50,7 @@ export default function Departement() {
               return [formDepartement];
             }
           });
+          setFormDepartement({});
         })
         .catch((error) => {
           console.error("Error adding department:", error);
@@ -35,7 +59,6 @@ export default function Departement() {
   };
 
   const updateDep = () => {
-    alert("okk");
     if (formDepartement.id_departement) {
       fetch(
         `${
@@ -68,7 +91,6 @@ export default function Departement() {
 
   const fillFormDepartement = (dep) => {
     setFormDepartement(dep);
-    alert("okee");
     console.log(dep);
   };
 
@@ -99,38 +121,18 @@ export default function Departement() {
     }
   };
 
-  useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_BASE_URL}/university/getAllDepartement`, {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          console.error("Failed to fetch departments");
-        }
-        return response.json(); // Parse JSON response
-      })
-      .then((data) => {
-        setDepartement(data.departements);
-      })
-      .catch((error) => {
-        console.error("Error fetching departments:", error);
-      });
-  }, [setDepartement]);
   if (user) {
     return (
       <div>
         <Header />
-        <div className="flex">
+        <h1 className="text-center text-4xl text-blue-500">Departement Page</h1>
+        <div className="flex flex-wrap justify-center">
           <form
             onSubmit={(e) => {
               e.preventDefault();
               // addDepartement();
             }}
-            className="bg-slate-50 w-1/3 flex flex-col justify-center items-center"
+            className="bg-slate-50 w-full sm:w-1/3 p-6"
           >
             <div className="w-full sm:w-2/3 md:w-4/5 lg:w-3/4 xl:w-2/3 mb-4">
               <label
@@ -139,6 +141,7 @@ export default function Departement() {
               >
                 ID Departement
               </label>
+              {/* Input for ID Departement */}
               <input
                 type="text"
                 id="id"
@@ -200,7 +203,6 @@ export default function Departement() {
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
-            {/* Buttons */}
             <div className="w-full sm:w-2/3 md:w-4/5 lg:w-3/4 xl:w-2/3 flex flex-col gap-4 items-center">
               <button
                 onClick={() => addDepartement()}
@@ -222,43 +224,45 @@ export default function Departement() {
               </button>
             </div>
           </form>
-        </div>
-        <div className=" w-2/3 mx-4">
-          <h1 className="text-center text-4xl text-blue-500 p-3">
-            Departement data
-          </h1>
-          <table className="table-auto w-full">
-            <thead>
-              <tr>
-                <th className="px-4 py-2">ID Department</th>
-                <th className="px-4 py-2">Name Department</th>
-                <th className="px-4 py-2">Name Dekan</th>
-                <th className="px-4 py-2">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {Array.isArray(departement) &&
-                departement.map((dep) => (
-                  <tr key={dep.id_departement}>
-                    <td className="px-4 py-2 border border-gray-300">
-                      {dep.id_departement}
-                    </td>
-                    <td className="px-4 py-2 border border-gray-300">
-                      {dep.name_departement}
-                    </td>
-                    <td className="px-4 py-2 border border-gray-300">
-                      {dep.name_dekan}
-                    </td>
-                    <td>
-                      <button onClick={() => fillFormDepartement(dep)}>
-                        Update
-                      </button>
-                      <button onClick={() => handleDelete(dep)}>delete</button>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
+          <div className="w-full sm:w-2/3 p-6">
+            <h1 className="text-center text-4xl text-blue-500 p-3">
+              Department data
+            </h1>
+            <table className="table-auto w-full">
+              <thead>
+                <tr>
+                  <th className="px-4 py-2">ID Department</th>
+                  <th className="px-4 py-2">Name Department</th>
+                  <th className="px-4 py-2">Name Dekan</th>
+                  <th className="px-4 py-2">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {Array.isArray(departement) &&
+                  departement.map((dep) => (
+                    <tr key={dep.id_departement}>
+                      <td className="px-4 py-2 border border-gray-300">
+                        {dep.id_departement}
+                      </td>
+                      <td className="px-4 py-2 border border-gray-300">
+                        {dep.name_departement}
+                      </td>
+                      <td className="px-4 py-2 border border-gray-300">
+                        {dep.name_dekan}
+                      </td>
+                      <td>
+                        <button onClick={() => fillFormDepartement(dep)}>
+                          Update
+                        </button>
+                        <button onClick={() => handleDelete(dep)}>
+                          delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     );

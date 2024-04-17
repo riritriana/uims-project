@@ -33,7 +33,7 @@ export async function login(req, res, next) {
     try {
         // Cek apakah pengguna ada di tabel user
         const user = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
-        // console.log(user);
+        console.log(user);
         if (user.rows.length > 0) {
             const passwordMatch = await argon2.verify(user.rows[0].password, password);
             console.log(passwordMatch);

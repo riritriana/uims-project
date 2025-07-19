@@ -172,7 +172,8 @@ export async function updateStudentById(req, res, next) {
 export async function deleteStudentById(req, res, next) {
     try {
         const { id_student } = req.params;
-
+        console.log(id_student);
+        
         // // Periksa apakah mahasiswa dengan id yang diberikan ada di database
         // const studentCheck = await pool.query(
         //     "SELECT * FROM student WHERE id_student = $1",
@@ -196,7 +197,7 @@ export async function deleteStudentById(req, res, next) {
 // add lecturer
 export async function addLecturer(req,res,next){
     try {
-        const {id_lecturer, name_lecturer,id_departement}= req.body;
+        const {id_lecturer, name_lecturer,departement_id}= req.body;
         // const departementCheck = await pool.query(
         //     "SELECT id_departement FROM departement WHERE id_departement = $1",
         //     [id_departement]
@@ -210,7 +211,7 @@ export async function addLecturer(req,res,next){
         // }
         const result = await pool.query(
             "INSERT INTO lecturer (id_lecturer,name_lecturer,id_departement) VALUES ($1, $2, $3) RETURNING *",
-            [id_lecturer, name_lecturer,id_departement]
+            [id_lecturer, name_lecturer,departement_id]
         );
         res.json({
             lecturer: result.rows[0],

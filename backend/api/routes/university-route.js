@@ -33,7 +33,7 @@ router.delete("/deleteDepartementById/:id", verifyToken, deleteDepartementById);
 router.get("/getAllStudent",verifyToken, getAllStudent); 
 router.post("/addStudent",verifyToken, addStudent);
 router.put("/updateStudentById/:id",verifyToken,updateStudentById);
-router.delete("/deleteStudentById/:id",verifyToken,deleteStudentById);
+router.delete("/deleteStudentById/:id_student",verifyToken,deleteStudentById);
 
 router.post("/addLecturer",verifyToken, addLecturer); 
 router.put("/updateLectuerById/:id",verifyToken, updateLecturerById);

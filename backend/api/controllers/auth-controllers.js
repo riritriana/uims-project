@@ -3,11 +3,11 @@ import argon2 from "argon2";
 import jwt from "jsonwebtoken";
 
 // ngambil hash password admin
-// const a = async()=>{
-//     const hash = await argon2.hash("2004");
-//     // console.log(hash);
-// }
-// a();
+const a = async()=>{
+    const hash = await argon2.hash("2004");
+    console.log(hash);
+}
+a();
 // register
 export async function register(req, res, next) {
     try {

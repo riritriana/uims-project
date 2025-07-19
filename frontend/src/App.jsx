@@ -14,6 +14,7 @@ function App() {
   const [dosen, setDosen] = useState([]);
   const [course, setCourse] = useState([]);
   const [learning, setLearning] = useState([]);
+  const [lecturer, setLecturer] = useState([]);
 
   const [countDepartement, setCountDepartement] = useState([]);
   const [countStudent, setCountStudent] = useState([]);
@@ -59,6 +60,8 @@ function App() {
         setCountStudent,
         countDosen,
         setCountDosen,
+        lecturer, 
+        setLecturer
       }}
     >
       <Outlet context={[user, setUser]} />

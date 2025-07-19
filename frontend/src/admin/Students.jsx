@@ -89,8 +89,7 @@ export default function Students() {
   const updateStudent = () => {
     if (formStudent?.id_student) {
       fetch(
-        `${
-          import.meta.env.VITE_API_BASE_URL
+        `${import.meta.env.VITE_API_BASE_URL
         }/university/updateDepartementById/${formStudent?.id_student}`,
         {
           method: "PUT",
@@ -127,14 +126,14 @@ export default function Students() {
       departement_id: s.id_departement || "",
 
       nameDepartement: s ? s.name_departement : "",
+      // name_dekan: s ? s.name_dekan : "",
     });
   };
 
   const handleDelete = (s) => {
     if (confirm("Are you sure you want to delete the student?")) {
       fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/university/deleteStudentById/${
-          s.id_student
+        `${import.meta.env.VITE_API_BASE_URL}/university/deleteStudentById/${s.id_student
         }`,
         {
           method: "DELETE",
@@ -229,31 +228,37 @@ export default function Students() {
                   const selectedDepartement = departement.find(
                     (dep) => dep.id_departement === selectedDepartementId
                   );
+                  console.log(selectedDepartement, " ini ");
+
                   setFormStudent({
                     ...formStudent,
                     departement_id: selectedDepartementId,
                     nameDepartement: selectedDepartement
                       ? selectedDepartement.name_departement
                       : "",
+                    nameDekan: selectedDepartement
+                      ? selectedDepartement.name_dekan
+                      : "",
+                    id_departement: selectedDepartement?.id_departement || null
                   });
                 }}
                 className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               >
                 <option value="">Pilih Departemen</option>
                 {Array.isArray(departement) &&
-                  departement.map((dep) => (
+                  departement.map((dep, i) => (
                     <option key={dep.id_departement} value={dep.id_departement}>
-                      {dep.id_departement}
+                      {i + 1}. {dep.name_departement}
                     </option>
                   ))}
               </select>
             </div>
             <div className="w-full sm:w-2/3 md:w-4/5 lg:w-3/4 xl:w-2/3 mb-4 ">
-              <label htmlFor="nameDep">Name Departement</label>
+              <label htmlFor="nameDep">Name Dekan</label>
               <input
                 type="text"
                 name="nameDep"
-                value={formStudent.nameDepartement}
+                value={formStudent.nameDekan}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>

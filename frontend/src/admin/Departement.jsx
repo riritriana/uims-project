@@ -130,7 +130,7 @@ export default function Departement() {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              // addDepartement();
+              addDepartement();
             }}
             className="bg-slate-50 w-full sm:w-1/3 p-6"
           >

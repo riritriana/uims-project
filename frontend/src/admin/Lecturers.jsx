@@ -46,7 +46,7 @@ export default function Lecturers() {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
+        console.log(data, " CHECK ");
         setLecturer(data.lecturers);
       })
       .catch((error) => {

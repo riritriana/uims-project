@@ -1,4 +1,4 @@
-#   UIMS (University Information Management System)
+#   UMIS (University Management Information System)
 
 ini adalah sebuah program managmen universitas, dimana kita sebagai admin bisa menambah mahasiswa, departement, matakuliah, pendapatan universitas(cuma belum terealisasi)
 ## Fitur

@@ -18,4 +18,4 @@ ini adalah sebuah program managmen universitas, dimana kita sebagai admin bisa m
 - BackEnd : Node.js & Express.js
 - DB : PostgreSQL
 - Devops : -
-- Repo : https://github.com/riritriana/uims-project
+- Repo : https://github.com/riritriana/university-manajement-information-system.git
